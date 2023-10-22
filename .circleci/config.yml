@@ -33,7 +33,7 @@ jobs:
     steps:
     - run:
         name: Intentional Fail
-        command: return 1
+        command: exit 1
     - run:
         name: callout
         command: echo "failed correctly"
