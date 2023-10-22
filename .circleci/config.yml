@@ -66,6 +66,10 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - build
-      - test
-      - analyze
+      - test:
+          requires: 
+            - build
+      - analyze:
+          requires:
+            - test
       
