@@ -9,21 +9,21 @@ jobs:
     steps:
       - run:
           name: SavingDoc
-          command: echo "Hello World File" > /workspace/udacityCICD/output.txt
+          command: echo "Hello World File" > ~/output.txt
       - persist_to_workspace:
-          root: /workspace/
+          root: ~/
           paths:
-            - udacityCICD/
+            - output.txt
 
   show_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /workspace/
+          at: ~/
       - run:
           name: SavingDoc
-          command: cat udacityCICD/output.txt
+          command: cat ~/output.txt
 
 # Orchestrate or schedule a set of jobs
 workflows:
