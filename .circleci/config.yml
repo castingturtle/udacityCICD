@@ -18,6 +18,14 @@ jobs:
           name: World
           command: echo World!
 
+  print_env_name:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: Name
+          command: echo $MY_NAME
+
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
@@ -26,3 +34,4 @@ workflows:
     jobs:
       - print_hello
       - print_world
+      - print_env_name
