@@ -28,14 +28,21 @@ jobs:
           name: SavingDoc
           command: cat ~/output.txt
 
+  intentional_fail:
+  <<: *defaults
+  steps:
+    - run:
+        name: Intentional Fail
+        command: return 1
+    - when: on_fail
+        name: callout
+        command: echo "failed correctly"
+
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
   welcome-workflow-1:
     # Run the welcome/run job in its own container
     jobs:
-      - save_world
-      - show_world:
-          requires: 
-          - save_world
+      - intentional_fail
       
