@@ -29,8 +29,8 @@ jobs:
           command: cat ~/output.txt
 
   intentional_fail:
-  <<: *defaults
-  steps:
+    <<: *defaults
+    steps:
     - run:
         name: Intentional Fail
         command: return 1
