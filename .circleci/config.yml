@@ -10,21 +10,28 @@ jobs:
           name: Hello
           command: echo Hello
 
-  print_world:
+  save_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - target/application.jar
+            - build/*
       - run:
-          name: World
-          command: echo World!
+          name: SavingDoc
+          command: echo 'Hello World File' > output.txt
 
-  print_env_name:
+  show_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
-          name: Name
-          command: echo $MY_NAME
+          name: SavingDoc
+          command: cat output.txt
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -32,6 +39,6 @@ workflows:
   welcome-workflow-1:
     # Run the welcome/run job in its own container
     jobs:
-      - print_hello
-      - print_world
-      - print_env_name
+      - save_world
+      - show_world
+      
