@@ -39,11 +39,33 @@ jobs:
         command: echo "failed correctly"
         when: on_fail
 
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm run lint
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm run test
+
+  analyze:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: npm audit
+
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
   welcome-workflow-1:
     # Run the welcome/run job in its own container
     jobs:
-      - intentional_fail
+      - build
+      - test
+      - analyze
       
