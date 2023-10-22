@@ -34,10 +34,10 @@ jobs:
     - run:
         name: Intentional Fail
         command: return 1
-    - when: on_fail
-        - run:
-            name: callout
-            command: echo "failed correctly"
+    - run:
+        name: callout
+        command: echo "failed correctly"
+        when: on_fail
 
 # Orchestrate or schedule a set of jobs
 workflows:
