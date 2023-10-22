@@ -2,36 +2,28 @@
 version: 2.1
 # Use a package of configuration called an orb.
 jobs:
-  print_hello:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: 
-          name: Hello
-          command: echo Hello
 
   save_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - persist_to_workspace:
-          root: /workspaces/udacityCICD/
-          paths:
-            - target/application.jar
-            - build/*
       - run:
           name: SavingDoc
-          command: echo 'Hello World File' > output.txt
+          command: echo 'Hello World File' > /workspace/udacityCICD/output.txt
+      - persist_to_workspace:
+          root: /workspace/
+          paths:
+            - udacityCICD/
 
   show_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /workspaces/udacityCICD/
+          at: /workspace/
       - run:
           name: SavingDoc
-          command: cat output.txt
+          command: cat udacityCICD/output.txt
 
 # Orchestrate or schedule a set of jobs
 workflows:
