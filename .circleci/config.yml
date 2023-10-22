@@ -2,8 +2,6 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
 
   jobs:
 
@@ -26,8 +24,8 @@ orbs:
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
-  welcome:
+  welcome-workflow:
     # Run the welcome/run job in its own container
     jobs:
-      - print_hello/run
-      - print_world/run
+      - print_hello
+      - print_world
