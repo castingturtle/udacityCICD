@@ -9,7 +9,7 @@ jobs:
     steps:
       - run:
           name: SavingDoc
-          command: echo 'Hello World File' > /workspace/udacityCICD/output.txt
+          command: echo "Hello World File" > /workspace/udacityCICD/output.txt
       - persist_to_workspace:
           root: /workspace/
           paths:
