@@ -6,7 +6,8 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      run: 
+      - checkout
+      - run: 
         name: Hello
         command: echo Hello
 
@@ -14,14 +15,15 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      run:
+      - checkout
+      - run:
         name: World
         command: echo World!
 
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
-  welcome-workflow:
+  welcome-workflow-1:
     # Run the welcome/run job in its own container
     jobs:
       - print_hello
